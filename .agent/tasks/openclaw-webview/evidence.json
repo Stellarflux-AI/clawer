@@ -1,0 +1,77 @@
+{
+  "task_id": "openclaw-webview",
+  "overall_status": "PASS",
+  "acceptance_criteria": [
+    {
+      "id": "AC1",
+      "text": "URL Entry Screen exists and is the app launch screen",
+      "status": "PASS",
+      "proof": [
+        "MainActivity.kt:56-88 — UrlEntryScreen composable with OutlinedTextField default http://localhost:18789/config and Open button",
+        "MainActivity.kt:42-48 — webViewUrl state starts null so UrlEntryScreen shows on launch"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "AC2",
+      "text": "WebView Screen loads the entered URL with JavaScript enabled",
+      "status": "PASS",
+      "proof": [
+        "MainActivity.kt:92-115 — WebViewScreen with AndroidView wrapping WebView",
+        "MainActivity.kt:108 — settings.javaScriptEnabled = true",
+        "MainActivity.kt:110 — loadUrl(url)"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "AC3",
+      "text": "Navigation between screens works",
+      "status": "PASS",
+      "proof": [
+        "MainActivity.kt:40-49 — state-based navigation null=entry, non-null=webview",
+        "MainActivity.kt:93 — BackHandler resets to null"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "AC4",
+      "text": "INTERNET permission is declared",
+      "status": "PASS",
+      "proof": [
+        "AndroidManifest.xml:5 — uses-permission INTERNET",
+        "AndroidManifest.xml:8 — usesCleartextTraffic=true"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "AC5",
+      "text": "App builds successfully",
+      "status": "PASS",
+      "proof": [
+        "./gradlew assembleDebug exit 0",
+        "./gradlew lint exit 0"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "AC6",
+      "text": "No leftover complex UI code",
+      "status": "PASS",
+      "proof": [
+        "Only 4 Kotlin files: MainActivity.kt, Color.kt, Theme.kt, Type.kt",
+        "No chat/cron/settings/agent screens or data layer"
+      ],
+      "gaps": []
+    }
+  ],
+  "changed_files": [
+    "app/src/main/java/com/stellarflux/MainActivity.kt",
+    "app/src/main/AndroidManifest.xml"
+  ],
+  "commands_for_fresh_verifier": [
+    "./gradlew assembleDebug",
+    "./gradlew lint",
+    "find app/src/main/java/com/stellarflux -name '*.kt'"
+  ],
+  "known_gaps": []
+}
