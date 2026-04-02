@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+.mcp.json
+/app/build
